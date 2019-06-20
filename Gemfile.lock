@@ -1,0 +1,38 @@
+PATH
+  remote: .
+  specs:
+    third_party_wxa (0.1.1)
+      json (>= 1.8.6)
+      rest-client (>= 2.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    domain_name (0.5.20180417)
+      unf (>= 0.0.5, < 1.0.0)
+    http-cookie (1.0.3)
+      domain_name (~> 0.5)
+    json (2.2.0)
+    mime-types (3.2.2)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2018.0812)
+    netrc (0.11.0)
+    rake (10.4.2)
+    rest-client (2.0.2)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 4.0)
+      netrc (~> 0.8)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.7.6)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bundler (~> 2.0)
+  rake (~> 10.0)
+  third_party_wxa!
+
+BUNDLED WITH
+   2.0.1
