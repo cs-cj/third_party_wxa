@@ -28,7 +28,7 @@ module ThirdPartyWxa
 
 			# 8、查询最新一次提交的审核状态（仅供第三方代小程序调用）
 			# https://api.weixin.qq.com/wxa/get_latest_auditstatus?access_token=TOKEN
-			def get_latest_auditstatus 'sign'
+			def get_latest_auditstatus sign
 				http_get_with_token 'sign', 'wxa', 'get_latest_auditstatus'
 			end
 

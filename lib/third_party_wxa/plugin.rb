@@ -16,7 +16,7 @@ module ThirdPartyWxa
 		# attr_accessor :authorizer_access_token, :authorizer_refresh_token, :authorizer_expire_at
 		# attr_accessor :authorizer
 
-		def initialize redis
+		def initialize
 			@appid = ThirdPartyWxa.appid
 			@appsecret = ThirdPartyWxa.appsecret
 		end
