@@ -1,6 +1,7 @@
 module ThirdPartyWxa
 
 	class << self
+		
 		attr_accessor :config
 
 		def configure
@@ -22,7 +23,7 @@ module ThirdPartyWxa
 	end
 
 	class Config
-		attr_accessor :redis, :appid, :appsecret
-	end
+    	attr_accessor :redis, :appid, :appsecret
+  	end
 
 end

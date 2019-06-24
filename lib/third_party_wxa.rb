@@ -1,6 +1,6 @@
 require 'rest_client'
 require 'redis'
-require "third_party_wxa/version"
+# require "third_party_wxa/version"
 require 'third_party_wxa/my_config'
 require "third_party_wxa/api"
 require 'third_party_wxa/plugin'
