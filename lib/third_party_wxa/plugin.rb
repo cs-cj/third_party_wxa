@@ -28,7 +28,7 @@ module ThirdPartyWxa
 
 		def component_access_token_valid?
 			return false if @component_access_token.nil? || @component_expire_at.nil?
-			@component_expire_at <= Time.now
+			@component_expire_at <= Time.now.to_i
 		end
 
 		def get_component_access_token
