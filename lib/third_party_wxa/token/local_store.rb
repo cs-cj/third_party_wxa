@@ -11,7 +11,7 @@ module ThirdPartyWxa
 				raise 'local_store --- get token from your local store'
 			end
 
-			def exchange_authorizer_access_token code. sign=nil
+			def exchange_authorizer_access_token code, sign=nil
 				plugin.authorizer_access_token_api code
 			end
 

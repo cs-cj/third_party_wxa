@@ -9,7 +9,7 @@ module ThirdPartyWxa
 			end
 
 			def self.init_with plugin
-				if ThirdPartyWxa.wx_redis.blank?
+				if ThirdPartyWxa.wx_redis.nil?
 					LocalStore.new plugin
 				else
 					RedisStore.new plugin
