@@ -17,12 +17,12 @@ module ThirdPartyWxa
 			end
 
 			#https:// api.weixin.qq.com /cgi-bin/component/api_authorizer_token?component_access_token=xxxxx
-			def authorizer_access_token_fresh
+			def authorizer_access_token_fresh auth_appid, refresh_token
 				
 				params = {
 				"component_appid": appid,
-				"authorizer_appid": wx_redis.hget(sign, 'appid'),
-				"authorizer_refresh_token": wx_redis.hget(sign, 'refresh_token'),
+				"authorizer_appid": auth_appid,
+				"authorizer_refresh_token": refresh_token,
 				}
 				http_post 'cgi-bin', 'component/api_authorizer_token', params
 			end

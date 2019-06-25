@@ -5,6 +5,14 @@ require 'third_party_wxa/config'
 require "third_party_wxa/api"
 require 'third_party_wxa/plugin'
 module ThirdPartyWxa
+
+	module Token
+		autoload(:Store,       		"third_party_wxa/token/store")
+		autoload(:LocalStore,       "third_party_wxa/token/local_store")
+		autoload(:RedisStore,       "third_party_wxa/token/redis_store")
+	end
+
+
   	BASE = 'https://api.weixin.qq.com/'.freeze
   	# scope => [cgi-bin, wxa]
 	class << self

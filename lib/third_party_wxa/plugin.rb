@@ -61,42 +61,24 @@ module ThirdPartyWxa
 			self
 		end
 
+		def token_store
+			Token::Store.init_with(self)
+		end
+
 		def authorizer_access_token_valid? sign
-			expire_at = wx_redis.hget sign, 'expire_at'
-			return false if wx_redis.hget(sign, 'access_token').blank? || expire_at.blank?
-			expire_at <= Time.now.to_i
+			token_store.authorizer_access_token_valid sign
 		end
 
 		def get_authorizer_access_token sign
-			if !authorizer_access_token_valid? # raise exception?
-				if wx_redis.hget(sign, 'refresh_token').present?
-					refresh_authorizer_access_token
-				else
-					raise 'refresh token is missing, please authorize again'
-				end
-			end
-			wx_redis.hget(sign, 'access_token')
+			token_store.get_authorizer_access_token sign
 		end
 
-		def set_authorizer_access_token sign, code
-			res = authorizer_access_token_api code
-			authorizer_access_token = res['authorization_info']['authorizer_access_token']
-			authorizer_appid = res['authorization_info']['authorizer_appid']
-			authorizer_expire_at = ThirdPartyWxa.cal_expire_at res['authorization_info']['expire_in']
-			authorizer_refresh_token = res['authorization_info']['authorizer_refresh_token']
-			wx_redis.hset sign, 'access_token', authorizer_access_token, 'appid', authorizer_appid,
-							'expire_at', authorizer_expire_at, 'refresh_token', authorizer_refresh_token
-			authorizer_access_token
+		def exchange_authorizer_access_token code, sign = nil
+			token_store.exchange_authorizer_access_token code, sign
 		end
 
-		def refresh_authorizer_access_token sign
-			res = authorizer_access_token_fresh sign
-			authorizer_access_token = res['authorizer_access_token']
-			authorizer_expire_at = ThirdPartyWxa.cal_expire_at res['expires_in']
-			authorizer_refresh_token = res['authorizer_refresh_token']
-			wx_redis.hset sign, 'access_token', authorizer_access_token,
-							'expire_at', authorizer_expire_at, 'refresh_token', authorizer_refresh_token
-			authorizer_access_token
+		def refresh_authorizer_access_token auth_appid, refresh_token
+			token_store.refresh_authorizer_access_token auth_appid, refresh_token
 		end
 
 		def http_get scope, url, url_params={}
