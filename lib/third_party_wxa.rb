@@ -36,9 +36,9 @@ module ThirdPartyWxa
 			5.minutes.to_i
 		end
 
-		def cal_expire_at expire_in, pre=nil
-			return (Time.now.to_i + expire_in.to_i - pre_expire) if pre.blank?
-			Time.now.to_i + expire_in.to_i - pre
+		def cal_expire_at expires_in, pre=nil
+			return (Time.now.to_i + expires_in.to_i - pre_expire) if pre.blank?
+			Time.now.to_i + expires_in.to_i - pre
 		end
 	end
 end

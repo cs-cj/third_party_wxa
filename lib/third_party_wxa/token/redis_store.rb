@@ -27,7 +27,7 @@ module ThirdPartyWxa
 				res = plugin.authorizer_access_token_api code
 				authorizer_access_token = res['authorization_info']['authorizer_access_token']
 				authorizer_appid = res['authorization_info']['authorizer_appid']
-				authorizer_expire_at = ThirdPartyWxa.cal_expire_at res['authorization_info']['expire_in']
+				authorizer_expire_at = ThirdPartyWxa.cal_expire_at res['authorization_info']['expires_in']
 				authorizer_refresh_token = res['authorization_info']['authorizer_refresh_token']
 				wx_redis.hset sign, 'access_token', authorizer_access_token, 'appid', authorizer_appid,
 								'expire_at', authorizer_expire_at, 'refresh_token', authorizer_refresh_token

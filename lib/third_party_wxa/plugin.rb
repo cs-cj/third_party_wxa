@@ -21,9 +21,9 @@ module ThirdPartyWxa
 			p "third party wxa use #{@token_store.class.to_s}"
 		end
 
-		def set_tickect ticket, expire_in
+		def set_tickect ticket, expires_in
 			@component_verify_ticket = ticket
-			@ticket_expire_at = ThirdPartyWxa.cal_expire_at expire_in
+			@ticket_expire_at = ThirdPartyWxa.cal_expire_at expires_in
 			self
 		end
 
@@ -40,7 +40,7 @@ module ThirdPartyWxa
 		def set_component_access_token
 			res = component_access_token_api
 			@component_access_token = res['component_access_token']
-			@component_expire_at = ThirdPartyWxa.cal_expire_at res['expire_in']
+			@component_expire_at = ThirdPartyWxa.cal_expire_at res['expires_in']
 			self
 		end
 
@@ -57,7 +57,7 @@ module ThirdPartyWxa
 		def set_pre_auth_code
 			res = pre_auth_code_api
 			@pre_auth_code = res['pre_auth_code']
-			@pre_expire_at = ThirdPartyWxa.cal_expire_at res['expire_in'], 60
+			@pre_expire_at = ThirdPartyWxa.cal_expire_at res['expires_in'], 60
 			self
 		end
 
