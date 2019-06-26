@@ -1,12 +1,13 @@
 module ThirdPartyWxa
 	class Plugin
 
-		include Api::Token
-		include Api::Template
+		include Api::Authorize
+		include Api::Code
+		include Api::Login
 		include Api::Member
 		include Api::Qrcode
-		include Api::Proxy
-		include Api::Authorize
+		include Api::Server
+		include Api::Template
 
 		attr_accessor :appid, :appsecret
 		attr_accessor :component_verify_ticket, :ticket_expire_at
@@ -21,9 +22,9 @@ module ThirdPartyWxa
 			p "third party wxa use #{@token_store.class.to_s}"
 		end
 
-		def set_tickect ticket, expires_in
+		def set_tickect ticket, expire_in
 			@component_verify_ticket = ticket
-			@ticket_expire_at = ThirdPartyWxa.cal_expire_at expires_in
+			@ticket_expire_at = ThirdPartyWxa.cal_expire_at expire_in
 			self
 		end
 
@@ -40,7 +41,7 @@ module ThirdPartyWxa
 		def set_component_access_token
 			res = component_access_token_api
 			@component_access_token = res['component_access_token']
-			@component_expire_at = ThirdPartyWxa.cal_expire_at res['expires_in']
+			@component_expire_at = ThirdPartyWxa.cal_expire_at res['expire_in']
 			self
 		end
 
@@ -57,7 +58,7 @@ module ThirdPartyWxa
 		def set_pre_auth_code
 			res = pre_auth_code_api
 			@pre_auth_code = res['pre_auth_code']
-			@pre_expire_at = ThirdPartyWxa.cal_expire_at res['expires_in'], 60
+			@pre_expire_at = ThirdPartyWxa.cal_expire_at res['expire_in'], 60
 			self
 		end
 
@@ -65,20 +66,20 @@ module ThirdPartyWxa
 			Token::Store.init_with(self)
 		end
 
-		def authorizer_access_token_valid? sign
-			token_store.authorizer_access_token_valid sign
+		def authorizer_access_token_valid? options={}
+			token_store.authorizer_access_token_valid options
 		end
 
-		def get_authorizer_access_token sign
-			token_store.get_authorizer_access_token sign
+		def get_authorizer_access_token options={}
+			token_store.get_authorizer_access_token options
 		end
 
-		def exchange_authorizer_access_token code, sign = nil
-			token_store.exchange_authorizer_access_token code, sign
+		def exchange_authorizer_access_token options={}
+			token_store.exchange_authorizer_access_token options
 		end
 
-		def refresh_authorizer_access_token auth_appid, refresh_token
-			token_store.refresh_authorizer_access_token auth_appid, refresh_token
+		def refresh_authorizer_access_token options={}
+			token_store.refresh_authorizer_access_token options
 		end
 
 		def http_get scope, url, url_params={}
@@ -91,13 +92,13 @@ module ThirdPartyWxa
 			ThirdPartyWxa.http_post_without_component_access_token scope, url, post_params, url_params
 		end
 
-		def http_get_with_token sign, scope, url, url_params={}
-			url_params.merge! auth_token_params
+		def http_get_with_token options, scope, url, url_params={}
+			url_params.merge! auth_token_params(options)
 			ThirdPartyWxa.http_get_without_component_access_token scope, url, url_params
 		end
 
-		def http_post_with_token sign, scope, url, post_params={}, url_params={}
-			url_params.merge! auth_token_params
+		def http_post_with_token options, scope, url, post_params={}, url_params={}
+			url_params.merge! auth_token_params(options)
 			ThirdPartyWxa.http_post_without_component_access_token scope, url, post_params, url_params
 		end
 
@@ -107,8 +108,8 @@ module ThirdPartyWxa
 			{access_token: get_component_access_token}
 		end
 
-		def auth_token_params sign
-			{access_token: get_authorizer_access_token(sign)}
+		def auth_token_params options
+			{access_token: get_authorizer_access_token(options)}
 		end
 
 		def wx_redis
