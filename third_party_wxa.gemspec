@@ -37,6 +37,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'rest-client', ['>= 2.0']
   spec.add_dependency 'json', ['>=1.8.6']
+  spec.add_dependency 'activesupport'
   spec.add_dependency 'redis'
 
   spec.add_development_dependency "bundler", "~> 2.0"
