@@ -7,7 +7,7 @@ module ThirdPartyWxa
 			def authorizer_access_token_valid? sign
 				expire_at = wx_redis.hget sign, 'expire_at'
 				return false if wx_redis.hget(sign, 'access_token').blank? || expire_at.blank?
-				expire_at <= Time.now.to_i
+				Time.now.to_i <= expire_at.to_i
 			end
 
 			def get_authorizer_access_token sign

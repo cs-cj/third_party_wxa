@@ -29,7 +29,7 @@ module ThirdPartyWxa
 
 		def component_access_token_valid?
 			return false if @component_access_token.nil? || @component_expire_at.nil?
-			@component_expire_at <= Time.now.to_i
+			Time.now.to_i <= @component_expire_at
 		end
 
 		def get_component_access_token 
@@ -46,7 +46,7 @@ module ThirdPartyWxa
 
 		def pre_auth_code_valid?
 			return false if @pre_auth_code.nil? || @pre_expire_at.nil?
-			@pre_expire_at <= Time.now.to_i
+			Time.now.to_i <= @pre_expire_at
 		end
 
 		def get_pre_auth_code
