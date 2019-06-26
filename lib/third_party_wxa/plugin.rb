@@ -22,6 +22,13 @@ module ThirdPartyWxa
 			p "third party wxa use #{@token_store.class.to_s}"
 		end
 
+		def test_case
+			a = {z: 1, x: 2, c: 3}
+			p a.slice!(:z, :x)
+			p a
+			nil
+		end
+
 		def set_tickect ticket, expire_in
 			@component_verify_ticket = ticket
 			@ticket_expire_at = ThirdPartyWxa.cal_expire_at expire_in
