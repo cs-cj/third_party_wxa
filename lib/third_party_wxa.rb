@@ -18,6 +18,7 @@ module ThirdPartyWxa
 	class << self
 		def http_get_without_component_access_token scope, url, url_params={}
 			url = "#{BASE}#{scope}/#{url}"
+			p "get -----  #{url}"
 			JSON.parse RestClient.get URI.encode(url), {params: url_params}
 		end
 
@@ -26,6 +27,8 @@ module ThirdPartyWxa
 			url = "#{BASE}#{scope}/#{url}"
 			param = url_params.to_param
 			url += "?#{param}" if !param.blank?
+			p "post -----  #{url}"
+			p post_params
 			JSON.parse RestClient.post URI.encode(url), post_params.to_json
 		end
 

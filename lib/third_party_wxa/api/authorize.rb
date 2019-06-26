@@ -13,7 +13,10 @@ module ThirdPartyWxa
 
 			def authorizer_access_token_api(auth_code)
 				params = {component_appid: appid, authorization_code: auth_code}
-				ThirdPartyWxa.http_post_without_component_access_token 'cgi-bin','component/api_query_auth', params, {component_access_token: get_component_access_token}
+				ThirdPartyWxa.http_post_without_component_access_token 'cgi-bin',
+																	   'component/api_query_auth',
+																	    params,
+																	    {component_access_token: get_component_access_token}
 			end
 
 			#https:// api.weixin.qq.com /cgi-bin/component/api_authorizer_token?component_access_token=xxxxx
@@ -24,7 +27,10 @@ module ThirdPartyWxa
 				"authorizer_appid": auth_appid,
 				"authorizer_refresh_token": refresh_token,
 				}
-				http_post 'cgi-bin', 'component/api_authorizer_token', params
+				ThirdPartyWxa.http_post_without_component_access_token 'cgi-bin', 
+																	   'component/api_authorizer_token',
+																	   params, 
+																	   {component_access_token: get_component_access_token}
 			end
 
 
