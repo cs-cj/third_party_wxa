@@ -8,7 +8,7 @@ module ThirdPartyWxa
 			end
 
 			def get_authorizer_access_token options
-				options.del(:access_token)
+				options.delete(:access_token)
 			end
 
 			def exchange_authorizer_access_token options
