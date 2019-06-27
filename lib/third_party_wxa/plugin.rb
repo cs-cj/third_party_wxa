@@ -15,9 +15,10 @@ module ThirdPartyWxa
 		attr_accessor :pre_auth_code,	:pre_expire_at	#10分钟
 		attr_accessor :token_store
 
-		def initialize
+		def initialize ticket = nil
 			@appid = ThirdPartyWxa.appid
 			@appsecret = ThirdPartyWxa.appsecret
+			@component_verify_ticket = ticket
 			@token_store = token_store_init
 			p "third party wxa use #{@token_store.class.to_s}"
 		end

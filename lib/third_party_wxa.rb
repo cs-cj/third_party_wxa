@@ -1,6 +1,7 @@
 require 'rest_client'
 require 'redis'
 require 'active_support'
+require 'active_support/core_ext'
 require 'third_party_wxa/config'
 require "third_party_wxa/api"
 require 'third_party_wxa/plugin'
@@ -19,6 +20,7 @@ module ThirdPartyWxa
 		def http_get_without_component_access_token scope, url, url_params={}
 			url = "#{BASE}#{scope}/#{url}"
 			p "get -----  #{url}"
+			p url_params
 			JSON.parse RestClient.get URI.encode(url), {params: url_params}
 		end
 

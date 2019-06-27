@@ -11,7 +11,7 @@ module ThirdPartyWxa
 					component_access_token: get_component_access_token,
 					grant_type: 'authorization_code'
 				}.merge!(options.slice(:appid, :js_code))
-				http_get 'sns', 'component/jscode2session', params
+				ThirdPartyWxa.http_get_without_component_access_token 'sns', 'component/jscode2session', params
 			end
 
 		end
