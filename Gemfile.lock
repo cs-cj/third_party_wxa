@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    third_party_wxa (0.2.5)
+    third_party_wxa (0.2.6)
       activesupport
       json (>= 1.8.6)
       redis

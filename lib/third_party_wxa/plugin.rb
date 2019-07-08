@@ -1,8 +1,6 @@
-require 'singleton'
 module ThirdPartyWxa
 	class Plugin
 		
-		include Singleton
 		include Api::Authorize
 		include Api::Code
 		include Api::Login
@@ -44,8 +42,11 @@ module ThirdPartyWxa
 		end
 
 		def get_component_access_token 
-			set_component_access_token if !component_access_token_valid?
-			@component_access_token
+			m = Mutex.new
+			m.synchronize{
+				set_component_access_token if !component_access_token_valid?
+				@component_access_token
+			}
 		end
 
 		def set_component_access_token
