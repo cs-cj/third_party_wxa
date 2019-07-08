@@ -1,6 +1,8 @@
+require 'singleton'
 module ThirdPartyWxa
 	class Plugin
-
+		
+		include Singleton
 		include Api::Authorize
 		include Api::Code
 		include Api::Login
