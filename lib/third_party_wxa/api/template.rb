@@ -15,12 +15,12 @@ module ThirdPartyWxa
 
 			# 将草稿箱的草稿选为小程序代码模版
 			def add_to_template(draft_id)
-				http_post 'wxa', 'addtotemplate', {draft_id: draft_id}.to_json
+				http_post 'wxa', 'addtotemplate', {draft_id: draft_id}
 			end
 
 			# 删除指定小程序代码模版
 			def delete_template(template_id)
-				http_post 'wxa', 'deletetemplate', {template_id: template_id}.to_json
+				http_post 'wxa', 'deletetemplate', {template_id: template_id}
 			end
 
 
