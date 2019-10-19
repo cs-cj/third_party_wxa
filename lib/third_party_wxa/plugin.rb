@@ -1,6 +1,6 @@
 module ThirdPartyWxa
 	class Plugin
-		
+
 		include Api::Authorize
 		include Api::Code
 		include Api::Login
@@ -41,7 +41,7 @@ module ThirdPartyWxa
 			Time.now.to_i <= @component_expire_at
 		end
 
-		def get_component_access_token 
+		def get_component_access_token
 			m = Mutex.new
 			m.synchronize{
 				set_component_access_token if !component_access_token_valid?
@@ -69,7 +69,7 @@ module ThirdPartyWxa
 		def set_pre_auth_code
 			res = pre_auth_code_api
 			@pre_auth_code = res['pre_auth_code']
-			@pre_expire_at = ThirdPartyWxa.cal_expire_at res['expires_in'], 60
+			@pre_expire_at = ThirdPartyWxa.cal_expire_at res['expires_in']#, 60
 			self
 		end
 
