@@ -3,20 +3,20 @@ module ThirdPartyWxa
 
 		class LocalStore < Store
 
-			def authorizer_access_token_valid *args
-				raise 'local_store --- please check expire_time yourself'
+			def valid?
+				return false if plugin.component_access_token.nil? || plugin.component_expire_at.nil?
+				Time.now.to_i <= plugin.component_expire_at
 			end
 
-			def get_authorizer_access_token options
-				options.delete(:access_token)
+			def set_token
+				res = plugin.component_access_token_api
+				plugin.component_access_token = res['component_access_token']
+				plugin.component_expire_at = ThirdPartyWxa.cal_expire_at res['expires_in']
+				plugin
 			end
 
-			def exchange_authorizer_access_token options
-				plugin.authorizer_access_token_api options.delete(:code)
-			end
-
-			def refresh_authorizer_access_token options
-				plugin.authorizer_access_token_fresh options.delete(:appid), options.delete(:refresh_token)
+			def get_token
+				plugin.component_access_token
 			end
 
 

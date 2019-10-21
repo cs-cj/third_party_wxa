@@ -16,6 +16,12 @@ module ThirdPartyWxa
 				end
 			end
 
+			def valid?
+			end
+
+			def set_token
+			end
+
 			def wx_redis
 				ThirdPartyWxa.wx_redis
 			end
