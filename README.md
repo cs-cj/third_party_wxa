@@ -22,7 +22,20 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+ThirdPartyWxa.configure do |config|
+  config.appid = appid
+  config.appsecret = appsecret
+end
+
+when workers of your web server are more than one， configure:
+
+redis = Redis.new
+ThirdPartyWxa.configure do |config|
+  config.appid = appid
+  config.appsecret = appsecret
+  config.redis = redis
+  config.redis_key = redis_key
+end
 
 ## Development
 
