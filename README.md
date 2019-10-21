@@ -22,13 +22,16 @@ Or install it yourself as:
 
 ## Usage
 
+```ruby
 ThirdPartyWxa.configure do |config|
   config.appid = appid
   config.appsecret = appsecret
 end
+```
 
 when workers of your web server are more than one， configure:
 
+```ruby
 redis = Redis.new
 ThirdPartyWxa.configure do |config|
   config.appid = appid
@@ -36,7 +39,7 @@ ThirdPartyWxa.configure do |config|
   config.redis = redis
   config.redis_key = redis_key
 end
-
+```
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
